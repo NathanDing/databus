@@ -47,8 +47,10 @@
 }
 ```
 - 最后在/server目录执行json-server db.json -w -p 13000
-### 添加Router支持：
 
+### 添加Router支持：
+- 执行npm install react-router react-router-dom --save
+- /src下添加routes.js文件，用于维护这个工程route
 
 ### 添加Redux支持：
 
