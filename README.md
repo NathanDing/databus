@@ -1,8 +1,12 @@
-# **你能走多远，取决于你填坑的能力有多大！**
+# _**你能走多远，取决于你填坑的能力有多大！**_
 
 
 ## 01.创建应用
 - 利用create-react-app创建react工程
+```
+    npm install -g create-react-app
+    create-react-app databus
+```
 - 安装redux
 ```
     npm install --save redux
