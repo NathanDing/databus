@@ -47,7 +47,7 @@
 }
 ```
 - 最后在/server目录执行json-server db.json -w -p 13000
-
+到这里已经完成模拟后台接口的服务搭建
 ### 添加Router支持：
 - 执行npm install react-router react-router-dom --save
 - /src下添加routes.js文件，用于维护这个工程route
@@ -56,3 +56,19 @@
 
 
 ### 添加Antd支持：
+
+## 03.修改配置及部分代码
+### 删除部分自动生成的代码
+- 以下删除的代码均是根据个人的开发习惯而定，可以对项目的代码结构做改动
+``` 
+ /--src
+    |--APP.css
+    |--APP.js
+    |--APP.test.js
+    |--registerServiceWorker.js
+``` 
+- 创建以下目录，根据个人的开发习惯而定，可以对项目的代码结构做改动
+```
+
+```
+- 修改配置
