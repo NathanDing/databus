@@ -24,13 +24,13 @@
 ```
 - 安装 Ant design及相关内容
 ```
-    **$ npm install --save  antd**
+    $ npm install --save  antd
     根据ant design官网介绍修改配置
     我们现在已经把组件成功运行起来了，但是在实际开发过程中还有很多问题，例如上面的例子实际上加载了全部的 antd 组件的样式（对前端性能是个隐患）。
     此时我们需要对 create-react-app 的默认配置进行自定义，这里我们使用 react-app-rewired （一个对 create-react-app 进行自定义配置的社区解决方案）。
     引入 react-app-rewired 并修改 package.json 里的启动配置。
     
-    **$ yarn add react-app-rewired --dev**
+    $ yarn add react-app-rewired --dev
     /* package.json */
     "scripts": {
     -   "start": "react-scripts start",
@@ -49,7 +49,7 @@
     使用 babel-plugin-import#
     babel-plugin-import 是一个用于按需加载组件代码和样式的 babel 插件（原理），现在我们尝试安装它并修改 config-overrides.js 文件。
     
-    **$ yarn add babel-plugin-import --dev**
+    $ yarn add babel-plugin-import --dev
     + const { injectBabelPlugin } = require('react-app-rewired');
     
       module.exports = function override(config, env) {
