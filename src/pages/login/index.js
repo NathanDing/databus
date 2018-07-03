@@ -39,8 +39,8 @@ class LoginPageForm extends React.Component {
 
                     //处理 请求success
                     if(json[0].userName === values.userName && json[0].password === values.password){
-                        console.log('111111111111111111111111')
-                        history.push("/index123");
+                        console.log('用户名密码验证结果：',true)
+                        history.push("/index");
                     }else {
                         this.setState({userName: values.userName})
                         this.setState({loginError: true})
@@ -60,7 +60,7 @@ class LoginPageForm extends React.Component {
         return (
             <div className="main">
                 <h2>DataBusAdmin</h2>
-                <h4 className="title2">基于React的后台管理系统模板(用户名/密码:admin/admin,guest/guest)</h4>
+                <h4 className="title2">基于React的后台管理系统模板(用户名/密码:admin/admin)</h4>
                 {this.state.loginError === true?<h4 className="loginErrorMsg">用户名&密码错误</h4>:""}
                 <Form onSubmit={this.handleSubmit} className="login-form">
                     <FormItem>
