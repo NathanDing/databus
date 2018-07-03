@@ -7,7 +7,7 @@ import rootReducer from './reducers';
 import './index.css';
 import registerServiceWorker from './registerServiceWorker';
 //创建store
-// const store = createStore(rootReducer);
+const store = createStore(rootReducer);
 //渲染
 ReactDOM.render(
     /**Provider 是 react-redux 库提供的，redux 本身并不强制依赖它，然而问题是 redux 本身也不依赖 react。
@@ -17,7 +17,7 @@ ReactDOM.render(
      * 实际上如果你用 react-redux，那么连接视图和数据层最好的办法是使用 connect 函数。本质上 Provider 就是
      * 给 connect 提供 store 用的。
      * */
-    <Provider >
+    <Provider store={store}>
         { routes }
     </Provider>
     , document.getElementById('root'));

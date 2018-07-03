@@ -23,3 +23,8 @@
     color: darkgray;
     margin-bottom: 30px;
 }
+.loginErrorMsg {
+    color: red;
+    margin-bottom: 10px;
+    margin-top: -15px;
+}

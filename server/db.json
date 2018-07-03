@@ -4,10 +4,6 @@
       "id": 1,
       "userName": "admin",
       "password": "admin"
-    },{
-      "id": 1,
-      "userName": "guest",
-      "password": "guest"
     }
   ],
   "posts": [
@@ -27,18 +23,27 @@
   "profile": {
     "name": "typicode"
   },
-  "menus":[
+  "menus": [
     {
       "name": "首页",
       "url": "index",
       "icon": "home"
-    },{
+    },
+    {
       "name": "组件模块",
       "url": "tool",
       "icon": "tool",
-      "children":[
-        {"name":"按钮","url":"button","icon":"appstore"},
-        {"name":"表单","url":"button","icon":"form"}
+      "children": [
+        {
+          "name": "按钮",
+          "url": "button",
+          "icon": "appstore"
+        },
+        {
+          "name": "表单",
+          "url": "button",
+          "icon": "form"
+        }
       ]
     }
   ]
