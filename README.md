@@ -47,7 +47,8 @@
       return config;
     };
     使用 babel-plugin-import#
-    babel-plugin-import 是一个用于按需加载组件代码和样式的 babel 插件（原理），现在我们尝试安装它并修改 config-overrides.js 文件。
+    babel-plugin-import 是一个用于按需加载组件代码和样式的 babel 插件（原理），
+    现在我们尝试安装它并修改 config-overrides.js 文件。
     
     $ yarn add babel-plugin-import --dev
     + const { injectBabelPlugin } = require('react-app-rewired');
@@ -110,6 +111,32 @@
 
 ## 02.创建应用目录结构
 ```
+├── build.js                   项目打包后的文件
+├── config                     webpack配置文件
+│   ├──...
+│   ├──webpack.config.dev.js   开发环境配置
+│   ├──webpack.config.prod.js  生产环境配置
+├── node_modules               node模块目录
+├── public
+│   └──index.html
+├── scripts
+│   ├── build.js               打包项目文件
+│   ├── start.js               启动项目文件
+│   └── test.js                测试项目文件
+├── src
+│   ├── actions            redux中的action
+│   ├── components         通用功能组件
+│   ├── container          通用样式组件
+│   ├── images
+│   ├── pages              页面模块
+│   ├── reducers           redux中的reducer
+│   ├── utils              工具类
+│   └── routes.js          前端路由
+│   └── server             json-server
+├── .gitignore
+├── package.json
+├── README.md
+└── yarn.lock
 ```
 ## 03.修改入口文件
 ```

@@ -1,4 +1,15 @@
 {
+  "users": [
+    {
+      "id": 1,
+      "userName": "admin",
+      "password": "admin"
+    },{
+      "id": 1,
+      "userName": "guest",
+      "password": "guest"
+    }
+  ],
   "posts": [
     {
       "id": 1,
