@@ -1,82 +1,134 @@
 import React from 'react';
+import { Link  } from 'react-router-dom'
 // 引入ant design样式
 import 'antd/dist/antd.css';
 import './index.css';
-import { Layout, Menu, Icon } from 'antd';
+import { Layout, Menu, Switch, Icon } from 'antd';
+import Top from './top'
+import Contents from './content'
 
-const { Header, Sider, Content } = Layout;
+import HttpUtils from '../utils/HttpUtils';
+const {  Sider } = Layout;
 const { SubMenu } = Menu;
-export default class Index extends React.Component {
-    state = {
-        collapsed: false,
-    };
 
+export default class Container extends React.Component {
+    // 构造函数声明
+    constructor(props){
+        super(props);//第一步，这是必须的
+        this.state = {//第二步，赋初始值
+            theme: 'dark',
+            mode: 'inline',
+            collapsed: false,
+            menus:[],
+            // 将传递过来的数据加入到state
+            ...this.props.location.state
+        };
+    }
+    changeTheme = (value) => {
+        this.setState({
+            theme: value ? 'dark' : 'light',
+        });
+    }
+    // 折叠
     toggle = () => {
         this.setState({
             collapsed: !this.state.collapsed,
+            mode: this.state.collapsed ? 'inline' : 'vertical',
         });
     }
+    handleClick = (e, special) => {
+        this.setState({
+            current: e.key || special,
+        });
+    }
+    // 挂载节点
+    componentWillMount(){
+        console.log("this.state.token",this.state.token)
+        if(this.state.token !== '' && typeof(this.state.token)!== 'undefined'){
+            HttpUtils.getFetch('http://localhost:13000/getMenus', this.state.token)
+                .then((json) => {
+                    console.log("menus json :", json)
+                    if(json.length > 0){
+                        this.setState({
+                            menus:json
+                        })
+                    }else {
+                        this.props.history.push("/")
+                    }
+                    console.log("this.state.menus:",this.state.menus)
+                },(json) => {
+                    //处理请求异常
+                    this.props.history.push("/")
+                });
+        }else {
+            this.props.history.push("/")
+        }
 
+    }
+
+    // 渲染
     render() {
-        return (
+        console.log("home-state:",this.state)
+        return(
             <Layout>
-                <Header className="header" style={{ padding: '0 0px',height:'60px' }}>
-                    <div className="logo">
-                        <span><h2 className="logoTitle">XXX后台管理系统</h2></span>
-                    </div>
+                <Sider
+                    trigger={null}
+                    collapsible
+                    collapsed={this.state.collapsed}
+                >
+                    { this.state.theme === 'light' ?
+                        <Icon type="ant-design" className="logo-c" /> :
+                        <Icon type="ant-design" className="logo-c white" />
+                    }
+                    { this.state.collapsed === false ? (this.state.theme === 'light' ? <span className="author">远望</span> : <span className="author white">远望</span>):"" }
                     <Menu
-                        theme="dark"
-                        mode="horizontal"
-                        defaultSelectedKeys={['1']}
-                        style={{ lineHeight: '60px' }}
+                        theme={this.state.theme}
+                        onClick={this.handleClick}
+                        defaultOpenKeys={['10']}
+                        selectedKeys={[this.state.current]}
+                        className="menu"
+                        mode={this.state.mode}
                     >
-                        <Menu.Item key="1">nav 1</Menu.Item>
-                        <Menu.Item key="2">nav 2</Menu.Item>
-                        <Menu.Item key="3">nav 3</Menu.Item>
+                    {
+                        this.state.menus.map((subMenu) => {
+                            if (subMenu.children && subMenu.children.length) {
+                                return (
+                                    <SubMenu key={subMenu.key} title={<span><Icon type={subMenu.icon} /><span>{subMenu.title}</span></span>}>
+                                        {subMenu.children.map(menu => (
+                                            <Menu.Item key={menu.key}><Link to={`/${menu.path}`}>{menu.title}</Link></Menu.Item>
+                                        ))}
+                                    </SubMenu>
+                                )
+                            }
+                            return (
+                                <Menu.Item key={subMenu.key}>
+                                    <Link to={`/${subMenu.path}`}>
+                                        <Icon type={subMenu.icon} /><span className="nav-text">{subMenu.title}</span>
+                                    </Link>
+                                </Menu.Item>
+                            )
+                        })
+                    }
                     </Menu>
-                </Header>
-                <Content style={{ padding: '0 0px',height:'90%' }}>
-                    <Layout>
-                        <Sider>
-                            <Menu
-                                mode="inline"
-                                defaultSelectedKeys={['1']}
-                                defaultOpenKeys={['sub1']}
-                                style={{ height: '100%' }}
-                            >
-                                <SubMenu key="sub1" title={<span><Icon type="user" />subnav 1</span>}>
-                                    <Menu.Item key="1">option1</Menu.Item>
-                                    <Menu.Item key="2">option2</Menu.Item>
-                                    <Menu.Item key="3">option3</Menu.Item>
-                                    <Menu.Item key="4">option4</Menu.Item>
-                                </SubMenu>
-                                <SubMenu key="sub2" title={<span><Icon type="laptop" />subnav 2</span>}>
-                                    <Menu.Item key="5">option5</Menu.Item>
-                                    <Menu.Item key="6">option6</Menu.Item>
-                                    <Menu.Item key="7">option7</Menu.Item>
-                                    <Menu.Item key="8">option8</Menu.Item>
-                                </SubMenu>
-                                <SubMenu key="sub3" title={<span><Icon type="notification" />subnav 3</span>}>
-                                    <Menu.Item key="9">option9</Menu.Item>
-                                    <Menu.Item key="10">option10</Menu.Item>
-                                    <Menu.Item key="11">option11</Menu.Item>
-                                    <Menu.Item key="12">option12</Menu.Item>
-                                </SubMenu>
-                            </Menu>
-                        </Sider>
-                        <Layout>
-                            <Header style={{ background: '#fff', padding: 0 }}>
-                                <Icon
-                                    className="trigger"
-                                    type={this.state.collapsed ? 'menu-unfold' : 'menu-fold'}
-                                    onClick={this.toggle}
-                                />
-                            </Header>
-                            <Content style={{ padding: '0 24px', height: '100%' }}></Content>
-                        </Layout>
-                    </Layout>
-                </Content>
+                    <div className="switch">
+                        <Switch
+                            checked={this.state.theme === 'dark'}
+                            onChange={this.changeTheme}
+                            checkedChildren="Dark"
+                            unCheckedChildren="Light"
+                        />
+                    </div>
+                </Sider>
+                <Layout>
+
+                    <Top toggle={this.toggle} collapsed={this.state.collapsed} clear={this.clear} />
+                    <Contents/>
+
+                </Layout>
             </Layout>
         );
     }
 }
+
+// export default withRouter(Container);
+

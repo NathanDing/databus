@@ -1,15 +1,16 @@
 import React from 'react';
-import {HashRouter, Route, Redirect, Switch} from 'react-router-dom';
-import LoginPage from './pages/login';
-import Index from './container'
+import {BrowserRouter, Route, Redirect, Switch} from 'react-router-dom';
+import Container from './container'
+import Login from './pages/login';
+
 const routes = (
-    <HashRouter histor>
+    <BrowserRouter>
         <Switch>
-            {/*<Route path="/" component={LoginPage}/>*/}
-            <Route path="/login" component={LoginPage}/>
-            <Route path="/index" component={Index}/>
-            <Redirect from='*' to='/login' />
+            <Route path="/" exact component={Login}/>
+            <Route path="/index" component={Container}/>
+
+            <Redirect to='/' />
         </Switch>
-    </HashRouter>
+    </BrowserRouter>
 );
 export default routes;

@@ -1,26 +1,48 @@
 .trigger {
     font-size: 18px;
     line-height: 64px;
-    padding: 0 24px;
+    padding: 1px 24px;
     cursor: pointer;
     transition: color .3s;
 }
-
-.trigger:hover {
-    color: #1890ff;
-}
-
 .logo {
-    width: 185px;
+    width: 184px;
     height: 31px;
     /*background: rgba(255,255,255,.2);*/
     /*margin: 16px 28px 16px 0;*/
     margin-left: 16px;
     float: left;
 }
+.trigger:hover {
+    color: #1890ff;
+}
 .ant-layout{
     height: 100%;
 }
-.logoTitle {
-    color: white;
+.menu {
+    height: 100%;
+    padding-top: 60px;
+}
+.switch {
+    position: absolute;
+    bottom: 4%;
+    right: 5%;
+}
+.author {
+    position: absolute;
+    top: 20px;
+    left: 65px;
+    font-size: 24px;
+    font-weight: 600;
+    font-family: "Microsoft YaHei","SimHei"
+}
+.white {
+    color: white
+}
+.logo-c {
+    position: absolute;
+    top: 20px;
+    left: 14px;
+    font-size: 36px;
+    animation: App-logo-spin infinite 20s linear;
 }

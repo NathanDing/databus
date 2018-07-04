@@ -1,4 +1,32 @@
 {
+  "login": {
+    "userName":"admin",
+    "token":"0d67704c-7f38-11e8-adc0-fa7ae01bbebc",
+    "success":true
+  },
+  "getMenus":[
+    {
+      "id":1,
+      "key":"10",
+      "icon":"home",
+      "title":"首页",
+      "path":"index/home"
+    },{
+      "id":2,
+      "key":"20",
+      "icon":"setting",
+      "title":"配置",
+      "children": [
+        {
+          "id":21,
+          "key":"2001",
+          "icon":"laptop",
+          "title":"元数据",
+          "path":"index/test"
+        }
+      ]
+    }
+  ],
   "users": [
     {
       "id": 1,

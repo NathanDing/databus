@@ -1,6 +1,6 @@
 import React from "react";
 
-export default class Index extends React.Component {
+export default class Home extends React.Component {
     render() {
         return (
             <h1>hello index</h1>

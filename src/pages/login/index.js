@@ -5,25 +5,23 @@ import 'antd/dist/antd.css';
 import './index.css'
 import { Form, Icon, Input, Button } from 'antd';
 import HttpUtils from '../../utils/HttpUtils';
-import createHistory from 'history/createHashHistory';
-
 
 const FormItem = Form.Item;
-const history = createHistory();
-
 
 //内部使用ant design，不做export default，而是Form.create({})(LoginPageForm);
-class LoginPageForm extends React.Component {
+class LoginPage extends React.Component {
     // 构造函数声明
-    constructor(props){
-        super(props);//第一步，这是必须的
-        //不能调用state
+    constructor(props,context){
+        super(props,context);//第一步，这是必须的
         this.state = {//第二步，赋初始值
             loginError:false,
-            userName:''
+            loginErrorMsg:'',
+            userName:'',
+            token:''
         };
     }
-    //表单提交
+
+    // 表单提交
     handleSubmit = (e) => {
         e.preventDefault();
         this.props.form.validateFields((err, values) => {
@@ -31,16 +29,19 @@ class LoginPageForm extends React.Component {
                 console.log('表单内容格式错误: ', values);
             }else {
                 console.log('表单内容格式正确: ', values);
-                HttpUtils.getFetch('http://localhost:13000/users', values.userName)
+                HttpUtils.getFetch('http://localhost:13000/login', values)
                 .then((json) => {
                     console.log(json)
-                    console.log(json[0].userName)
-                    console.log(json[0].password)
-
                     //处理 请求success
-                    if(json[0].userName === values.userName && json[0].password === values.password){
+                    if(json.success && json.token !== ''){
                         console.log('用户名密码验证结果：',true)
-                        history.push("/index");
+                        this.setState({userName: json.userName});
+                        this.setState({token: json.token})
+                        var path = {
+                            pathname:'/index/home',
+                            state:this.state
+                        }
+                        this.props.history.push(path)
                     }else {
                         this.setState({userName: values.userName})
                         this.setState({loginError: true})
@@ -56,7 +57,7 @@ class LoginPageForm extends React.Component {
     render() {
         //用于和表单进行双向绑定
         const { getFieldDecorator } = this.props.form;
-        // console.log("state:",this.state)
+        console.log("state:",this.state)
         return (
             <div className="main">
                 <h2>DataBusAdmin</h2>
@@ -93,5 +94,5 @@ class LoginPageForm extends React.Component {
     }
 }
 //通过 Form.create 创建的Form，内部有this.props.form。详见ant design官方文档
-const LoginPage = Form.create({})(LoginPageForm);
-export default  LoginPage;
+const Login = Form.create({})(LoginPage);
+export default  Login;
