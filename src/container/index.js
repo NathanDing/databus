@@ -119,6 +119,7 @@ export default class Container extends React.Component {
                         )
                         :""
                     }
+                    {/*菜单目前支持三层，后期完善*/}
                     <Menu
                         theme={this.state.theme}
                         onClick={this.handleClick}
@@ -133,9 +134,28 @@ export default class Container extends React.Component {
                             if (subMenu.children && subMenu.children.length) {
                                 return (
                                     <SubMenu key={subMenu.key} title={<span><Icon type={subMenu.icon} /><span>{subMenu.title}</span></span>}>
-                                        {subMenu.children.map(menu => (
-                                            <Menu.Item key={menu.key}><Link to={`/${menu.path}`}>{menu.title}</Link></Menu.Item>
-                                        ))}
+                                        {subMenu.children.map((menu) => {
+                                            if (menu.children && menu.children.length) {
+                                                return (
+                                                    <SubMenu key={menu.key} title={<span><Icon type={menu.icon} /><span>{menu.title}</span></span>}>
+                                                        {menu.children.map(menusub => (
+                                                            <Menu.Item key={menusub.key}>
+                                                                <Link to={`/${menusub.path}`}>
+                                                                    <Icon type={menusub.icon} /><span className="nav-text">{menusub.title}</span>
+                                                                </Link>
+                                                            </Menu.Item>
+                                                        ))}
+                                                    </SubMenu>
+                                                 )
+                                            }
+                                                return (
+                                                    <Menu.Item key={menu.key}>
+                                                        <Link to={`/${menu.path}`}>
+                                                            <Icon type={menu.icon} /><span className="nav-text">{menu.title}</span>
+                                                        </Link>
+                                                    </Menu.Item>
+                                                )
+                                        })}
                                     </SubMenu>
                                 )
                             }

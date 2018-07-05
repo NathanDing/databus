@@ -48,7 +48,7 @@ class LoginPage extends React.Component {
                     //处理 请求success
                     if(json.success && json.token !== ''){
                         console.log('用户名密码验证结果：',true)
-                        this.setState({userName: json.userName});
+                        this.setState({userName: values.userName});
                         this.setState({token: json.token})
                         var path = {
                             pathname:'/index/home',

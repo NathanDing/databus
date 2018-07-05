@@ -23,6 +23,26 @@
           "icon":"laptop",
           "title":"测试",
           "path":"index/test"
+        },{
+          "id":22,
+          "key":"2002",
+          "icon":"github",
+          "title":"测试2",
+          "children": [
+            {
+              "id":221,
+              "key":"200201",
+              "icon":"dingding",
+              "title":"测试3",
+              "path":"index/test"
+            },{
+              "id":222,
+              "key":"200202",
+              "icon":"qq",
+              "title":"测试4",
+              "path":"index/test"
+            }
+          ]
         }
       ]
     }
