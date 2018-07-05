@@ -79,21 +79,21 @@ class LoginPage extends React.Component {
                 <Form onSubmit={this.handleSubmit} className="login-form">
                     <FormItem>
                         {getFieldDecorator('userName', {
-                                rules: [
-                                    { required: true, message: '请输入您的用户名!' },
-                                    { pattern:'^[A-Za-z]+$', message: '用户名是字母组成!' },
-                                ],
-                            })(
-                                <Input prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="用户名" />
-                            )
+                            rules: [
+                                { required: true, message: '请输入您的用户名!' },
+                                { pattern:'^[A-Za-z]+$', message: '用户名是字母组成!' },
+                            ],
+                        })(
+                            <Input prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="用户名" />
+                        )
                         }
                     </FormItem>
                     <FormItem>
                         {getFieldDecorator('password', {
-                                rules: [{ required: true, message: '请输入您的密码!' }],
-                            })(
-                                <Input prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />} type="password" placeholder="密码" />
-                            )
+                            rules: [{ required: true, message: '请输入您的密码!' }],
+                        })(
+                            <Input prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />} type="password" placeholder="密码" />
+                        )
                         }
                     </FormItem>
                     <FormItem>
@@ -103,6 +103,7 @@ class LoginPage extends React.Component {
                     </FormItem>
                 </Form>
             </div>
+
         );
     }
 }
