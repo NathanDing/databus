@@ -16,12 +16,11 @@ export default class Top extends React.Component {
         };
     }
     componentDidMount() {
-        // this.getUser()
     }
     // 退出
     clear = (item) => {
         if (item.key === 'logOut') {
-            // this.props.clear()
+            // 清空sessionStorage中的token&&userName
             sessionStorage.token = ''
             sessionStorage.userName = ''
         }
