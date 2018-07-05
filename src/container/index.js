@@ -19,32 +19,44 @@ export default class Container extends React.Component {
             theme: 'dark',
             mode: 'inline',
             collapsed: false,
+            current:'10',
             menus:[],
-            // 将传递过来的数据加入到state
+            // 将登录传递过来的数据加入到state（token,userName）
             ...this.props.location.state
         };
+
     }
+
+    // 变更state的theme来控制主题颜色
     changeTheme = (value) => {
         this.setState({
             theme: value ? 'dark' : 'light',
         });
     }
-    // 折叠
+
+    // 变更state的theme来控制折叠及显示
     toggle = () => {
         this.setState({
             collapsed: !this.state.collapsed,
             mode: this.state.collapsed ? 'inline' : 'vertical',
         });
     }
+
+    // 控制左侧菜单的选中（变蓝）
     handleClick = (e, special) => {
         this.setState({
             current: e.key || special,
         });
     }
+
     // 挂载节点
     componentWillMount(){
         console.log("this.state.token",this.state.token)
+        console.log("sessionStorage.token",sessionStorage.token)
+        // 若state中存在token，则请求菜单数据，并将菜单数据设置到state的menus上
         if(this.state.token !== '' && typeof(this.state.token)!== 'undefined'){
+            sessionStorage.token = this.state.token;
+            sessionStorage.userName = this.state.userName;
             HttpUtils.getFetch('http://localhost:13000/getMenus', this.state.token)
                 .then((json) => {
                     console.log("menus json :", json)
@@ -61,35 +73,62 @@ export default class Container extends React.Component {
                     this.props.history.push("/")
                 });
         }else {
-            this.props.history.push("/")
+            //若state中不存在token，继而判断sessionStorage中是否存在。
+            // 若存在，则请求菜单数据，并将菜单数据设置到state的menus上
+            if(sessionStorage.token !== '' && typeof(sessionStorage.token)!== 'undefined'){
+                HttpUtils.getFetch('http://localhost:13000/getMenus', this.state.token)
+                    .then((json) => {
+                        console.log("menus json :", json)
+                        if(json.length > 0){
+                            this.setState({
+                                menus:json
+                            })
+                        }else {
+                            this.props.history.push("/")
+                        }
+                        console.log("this.state.menus:",this.state.menus)
+                    },(json) => {
+                        //处理请求异常
+                        this.props.history.push("/")
+                    });
+            }else {
+                this.props.history.push("/")
+            }
         }
-
     }
 
     // 渲染
     render() {
+        console.log("this.state.token",this.state.token)
         console.log("home-state:",this.state)
         return(
             <Layout>
                 <Sider
-                    trigger={null}
+                    trigger={null} // 去除sider底部的折叠按钮
                     collapsible
                     collapsed={this.state.collapsed}
                 >
                     { this.state.theme === 'light' ?
-                        <Icon type="ant-design" className="logo-c" /> :
-                        <Icon type="ant-design" className="logo-c white" />
+                        <Icon type="gitlab" className="logo-c" /> :
+                        <Icon type="gitlab" className="logo-c white" />
                     }
-                    { this.state.collapsed === false ? (this.state.theme === 'light' ? <span className="author">远望</span> : <span className="author white">远望</span>):"" }
+                    { this.state.collapsed === false ?
+                        (this.state.theme === 'light' ?
+                            <span className="author">百兆</span> :
+                            <span className="author white">百兆</span>
+                        )
+                        :""
+                    }
                     <Menu
                         theme={this.state.theme}
                         onClick={this.handleClick}
-                        defaultOpenKeys={['10']}
-                        selectedKeys={[this.state.current]}
+                        defaultOpenKeys={['10']} // 默认打开的菜单，根据menu数据中首页的key为"10",所以写死
+                        selectedKeys={[this.state.current]} // 选中的菜单
                         className="menu"
                         mode={this.state.mode}
                     >
                     {
+                        // 遍历state中的菜单数据并渲染菜单
                         this.state.menus.map((subMenu) => {
                             if (subMenu.children && subMenu.children.length) {
                                 return (
@@ -110,6 +149,7 @@ export default class Container extends React.Component {
                         })
                     }
                     </Menu>
+                    {/*主题颜色开关*/}
                     <div className="switch">
                         <Switch
                             checked={this.state.theme === 'dark'}
@@ -119,11 +159,12 @@ export default class Container extends React.Component {
                         />
                     </div>
                 </Sider>
+                {/*右侧布局*/}
                 <Layout>
-
-                    <Top toggle={this.toggle} collapsed={this.state.collapsed} clear={this.clear} />
+                    {/*头部*/}
+                    <Top toggle={this.toggle} collapsed={this.state.collapsed} userName={sessionStorage.userName}/>
+                    {/*内容*/}
                     <Contents/>
-
                 </Layout>
             </Layout>
         );

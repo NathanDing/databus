@@ -8,35 +8,28 @@ const SubMenu = Menu.SubMenu
 const { Header } = Layout
 
 export default class Top extends React.Component {
+    // 构造函数声明
     constructor(props) {
-        super(props)
-        this.state = {
-            username: ''
-        }
+        super(props);
+        this.state = {//第二步，赋初始值
+            ...props
+        };
     }
-
     componentDidMount() {
-        this.getUser()
+        // this.getUser()
     }
-
-    getUser = () => {
-        this.setState({
-            username: 'Muyy'
-        })
-    }
-
+    // 退出
     clear = (item) => {
         if (item.key === 'logOut') {
-            this.props.clear()
+            // this.props.clear()
+            sessionStorage.token = ''
+            sessionStorage.userName = ''
         }
     }
 
-    // screenFull = () => {
-    //     if (screenfull.enabled) {
-    //         screenfull.request();
-    //     }
-    // }
     render() {
+        console.log("top state:", this.state)
+        console.log("top props:", this.props)
         return (
             <Header style={{ background: '#fff'}}>
                 <Icon
@@ -45,15 +38,10 @@ export default class Top extends React.Component {
                     onClick={this.props.toggle}
                 />
                 <Menu mode="horizontal" className="logOut" onClick={this.clear}>
-                    <SubMenu title={<span><Icon type="user" />{ this.state.username }</span>} >
+                    <SubMenu title={<span><Icon type="user" />{ this.props.userName }</span>} >
                         <Menu.Item key="logOut"><Link to="/login" >退出</Link></Menu.Item>
                     </SubMenu>
                 </Menu>
-                {/*<Icon
-                    className="screenFull"
-                    type="arrows-alt"
-                    onClick={this.screenFull}
-                />*/}
             </Header>
         );
     }

@@ -14,11 +14,24 @@ class LoginPage extends React.Component {
     constructor(props,context){
         super(props,context);//第一步，这是必须的
         this.state = {//第二步，赋初始值
-            loginError:false,
-            loginErrorMsg:'',
-            userName:'',
-            token:''
+            loginError:false,// 登录错误的标记
+            loginErrorMsg:'',// 登录错误的提示消息
+            userName:''// 用户名
         };
+    }
+
+    // 挂载
+    componentWillMount(){
+        // 若sessionStorage中的token存在，路由到/index/home
+        if(sessionStorage.token !== '' && typeof(sessionStorage.token)!== 'undefined') {
+            this.setState({userName: sessionStorage.userName});
+            this.setState({token: sessionStorage.token})
+            var path = {
+                pathname:'/index/home',
+                state:this.state
+            }
+            this.props.history.push(path)
+        }
     }
 
     // 表单提交
@@ -57,7 +70,7 @@ class LoginPage extends React.Component {
     render() {
         //用于和表单进行双向绑定
         const { getFieldDecorator } = this.props.form;
-        console.log("state:",this.state)
+        console.log("login page state:",this.state)
         return (
             <div className="main">
                 <h2>DataBusAdmin</h2>
