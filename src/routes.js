@@ -1,6 +1,7 @@
 import React from 'react';
 import {BrowserRouter, Route, Redirect, Switch} from 'react-router-dom';
 import Container from './container'
+import Index2 from './container/index2'
 import Login from './pages/login';
 
 const routes = (
@@ -11,6 +12,7 @@ const routes = (
             <Route path="/" exact component={Login}/>
             {/*容器页面，项目的所有路径以/index为前缀*/}
             <Route path="/index" component={Container}/>
+            <Route path="/index2" component={Index2}/>
             {/*重定向*/}
             <Redirect from="*" to='/' />
         </Switch>

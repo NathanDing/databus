@@ -2,7 +2,7 @@ import React, { Fragment } from 'react';
 import { Link  } from 'react-router-dom'
 // 引入ant design样式
 import 'antd/dist/antd.css';
-import './index.css';
+import './index2.css';
 import { Layout, Menu, Switch, Icon } from 'antd';
 import Top from './top'
 import Contents from './content'
@@ -113,13 +113,22 @@ export default class Container extends React.Component {
                         <Icon type="cloud-o" className="logo-c" /> :
                         <Icon type="cloud-o" className="logo-c white" />
                     }
-                    { this.state.collapsed === false ?
-                        (this.state.theme === 'light' ?
-                            <span className="author">百兆100</span> :
-                            <span className="author white">百兆100</span>
-                        )
-                        :""
-                    }
+                    <Icon
+                        className="trigger"
+                        type={this.props.collapsed ? 'menu-unfold' : 'menu-fold'}
+                        onClick={this.props.toggle}
+                    />
+                    {/*{ this.state.theme === 'light' ?*/}
+                        {/*<Icon type="cloud-o" className="logo-c" /> :*/}
+                        {/*<Icon type="cloud-o" className="logo-c white" />*/}
+                    {/*}*/}
+                    {/*{ this.state.collapsed === false ?*/}
+                        {/*(this.state.theme === 'light' ?*/}
+                            {/*<span className="author">百兆100</span> :*/}
+                            {/*<span className="author white">百兆100</span>*/}
+                        {/*)*/}
+                        {/*:""*/}
+                    {/*}*/}
                     {/*菜单目前支持三层，后期完善*/}
                     <Menu
                         theme={this.state.theme}
@@ -183,7 +192,7 @@ export default class Container extends React.Component {
                 {/*右侧布局*/}
                 <Layout>
                     {/*头部*/}
-                    <Top toggle={this.toggle} collapsed={this.state.collapsed} userName={sessionStorage.userName}/>
+                    {/*<Top toggle={this.toggle} collapsed={this.state.collapsed} userName={sessionStorage.userName}/>*/}
                     {/*内容*/}
                     <Contents/>
                     <div style={{margin:"auto"}}>
