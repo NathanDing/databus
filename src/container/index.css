@@ -1,7 +1,7 @@
 .trigger {
     font-size: 18px;
-    line-height: 64px;
-    padding: 1px 24px;
+    margin-left: 43%;
+    margin-top: 5px;
     cursor: pointer;
     transition: color .3s;
 }
@@ -21,23 +21,34 @@
 }
 .menu {
     height: 100%;
-    padding-top: 57px;
+    /*width: 45px;*/
+    /*padding: 0!important;*/
 }
 .author {
     position: absolute;
-    top: 20px;
+    top: 2px;
     left: 65px;
-    font-size: 24px;
+    font-size: 20px;
     font-weight: 600;
     font-family: "Microsoft YaHei","SimHei"
 }
 .logo-c {
     position: absolute;
-    top: 18px;
+    margin-top: 10px;
     left: 21px;
     font-size: 38px;
     animation: App-logo-spin infinite 20s linear;
 }
 .white {
     color: white
+}
+/*.ant-Sider {*/
+    /*width: 100px;*/
+/*}*/
+.nav-text {
+    /*display: none;*/
+}
+.nav-icon {
+    /*position:absolute;*/
+    /*left:-20px;*/
 }

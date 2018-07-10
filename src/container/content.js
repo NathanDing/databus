@@ -10,9 +10,9 @@ const { Content } = Layout
 
 export default class Contents extends React.Component {
 
-    constructor(props){
-        super(props);//第一步，这是必须的
-    }
+    // constructor(props){
+    //     super(props);//第一步，这是必须的
+    // }
     render() {
         return (
             <Content className="content" style={{ background: '#ECECEC'}}>

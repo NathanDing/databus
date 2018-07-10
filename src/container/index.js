@@ -4,11 +4,11 @@ import { Link  } from 'react-router-dom'
 import 'antd/dist/antd.css';
 import './index.css';
 import { Layout, Menu, Switch, Icon } from 'antd';
-import Top from './top'
+// import Top from './top'
 import Contents from './content'
 
 import HttpUtils from '../utils/HttpUtils';
-const {  Sider } = Layout;
+const { Header, Sider } = Layout;
 const { SubMenu } = Menu;
 
 export default class Container extends React.Component {
@@ -103,92 +103,111 @@ export default class Container extends React.Component {
         console.log("home-state:",this.state)
         return(
             <Layout>
-                <Sider
-                    theme={this.state.theme}
-                    trigger={null} // 去除sider底部的折叠按钮
-                    collapsible
-                    collapsed={this.state.collapsed}
-                >
-                    { this.state.theme === 'light' ?
-                        <Icon type="cloud-o" className="logo-c" /> :
-                        <Icon type="cloud-o" className="logo-c white" />
-                    }
+                <Header style={{height:"50px"}}>
+                    <Icon type="cloud-o" className="logo-c white" />
                     { this.state.collapsed === false ?
-                        (this.state.theme === 'light' ?
-                            <span className="author">百兆100</span> :
-                            <span className="author white">百兆100</span>
-                        )
+                        <span className="author white">百兆100</span>
                         :""
                     }
-                    {/*菜单目前支持三层，后期完善*/}
-                    <Menu
-                        theme={this.state.theme}
-                        onClick={this.handleClick}
-                        defaultOpenKeys={['20']} // 默认打开的菜单，根据menu数据中首页的key为"10",所以写死
-                        selectedKeys={[this.state.current]} // 选中的菜单
-                        className="menu"
-                        mode={this.state.mode}
-                    >
-                        {
-                            // 遍历state中的菜单数据并渲染菜单
-                            this.state.menus.map((subMenu) => {
-                                if (subMenu.children && subMenu.children.length) {
-                                    return (
-                                        <SubMenu key={subMenu.key} title={<span><Icon type={subMenu.icon} /><span>{subMenu.title}</span></span>}>
-                                            {subMenu.children.map((menu) => {
-                                                if (menu.children && menu.children.length) {
-                                                    return (
-                                                        <SubMenu key={menu.key} title={<span><Icon type={menu.icon} /><span>{menu.title}</span></span>}>
-                                                            {menu.children.map(menusub => (
-                                                                <Menu.Item key={menusub.key}>
-                                                                    <Link to={`/${menusub.path}`}>
-                                                                        <Icon type={menusub.icon} /><span className="nav-text">{menusub.title}</span>
-                                                                    </Link>
-                                                                </Menu.Item>
-                                                            ))}
-                                                        </SubMenu>
-                                                     )
-                                                }
-                                                    return (
-                                                        <Menu.Item key={menu.key}>
-                                                            <Link to={`/${menu.path}`}>
-                                                                <Icon type={menu.icon} /><span className="nav-text">{menu.title}</span>
-                                                            </Link>
-                                                        </Menu.Item>
-                                                    )
-                                            })}
-                                        </SubMenu>
-                                    )
-                                }
-                                return (
-                                    <Menu.Item key={subMenu.key}>
-                                        <Link to={`/${subMenu.path}`}>
-                                            <Icon type={subMenu.icon} /><span className="nav-text">{subMenu.title}</span>
-                                        </Link>
-                                    </Menu.Item>
-                                )
-                            })
-                        }
-                        {/*主题颜色开关*/}
-                        <Switch style={{marginTop:"50px",marginBottom:"398px",marginLeft:"5px"}}
-                            size="small"
-                            checked={this.state.theme === 'dark'}
-                            onChange={this.changeTheme}
-                            checkedChildren="Dark"
-                            unCheckedChildren="Light"
-                        />
-                    </Menu>
-
-                </Sider>
-                {/*右侧布局*/}
+                    {/*{ this.state.theme === 'light' ?*/}
+                        {/*<Icon type="cloud-o" className="logo-c" /> :*/}
+                        {/*<Icon type="cloud-o" className="logo-c white" />*/}
+                    {/*}*/}
+                    {/*{ this.state.collapsed === false ?*/}
+                        {/*(this.state.theme === 'light' ?*/}
+                                {/*<span className="author">百兆100</span> :*/}
+                                {/*<span className="author white">百兆100</span>*/}
+                        {/*)*/}
+                        {/*:""*/}
+                    {/*}*/}
+                </Header>
                 <Layout>
-                    {/*头部*/}
-                    <Top toggle={this.toggle} collapsed={this.state.collapsed} userName={sessionStorage.userName}/>
-                    {/*内容*/}
-                    <Contents/>
-                    <div style={{margin:"auto"}}>
-                        <Fragment>Copyright <Icon type="copyright" /> 2018 百兆100出品</Fragment>
-                    </div>
+                    <Sider
+                        theme={this.state.theme}
+                        trigger={null} // 去除sider底部的折叠按钮
+                        collapsible
+                        collapsedWidth="55px"
+                        collapsed={this.state.collapsed}
+                    >
+                        <div key="collapsedState" style={{height:"24px",paddingRight:"20px"}}>
+                            <Icon
+                                className={this.state.theme === 'light'?"trigger":"trigger white"}
+                                type={this.state.collapsed ? 'menu-unfold' : 'menu-fold'}
+                                onClick={this.toggle}
+                            />
+
+                        </div>
+
+                        {/*菜单目前支持三层，后期完善*/}
+                        <Menu
+                            theme={this.state.theme}
+                            onClick={this.handleClick}
+                            defaultOpenKeys={['10']} // 默认打开的菜单，根据menu数据中首页的key为"10",所以写死
+                            selectedKeys={[this.state.current]} // 选中的菜单
+                            className="menu"
+                            mode={this.state.mode}
+                        >
+                            {
+                                // 遍历state中的菜单数据并渲染菜单
+                                this.state.menus.map((subMenu) => {
+                                    if (subMenu.children && subMenu.children.length) {
+                                        return (
+                                            <SubMenu key={subMenu.key} title={<span><Icon type={subMenu.icon} /><span>{subMenu.title}</span></span>}>
+                                                {subMenu.children.map((menu) => {
+                                                    if (menu.children && menu.children.length) {
+                                                        return (
+                                                            <SubMenu key={menu.key} title={<span><Icon type={menu.icon} /><span>{menu.title}</span></span>}>
+                                                                {menu.children.map(menusub => (
+                                                                    <Menu.Item key={menusub.key}>
+                                                                        <Link to={`/${menusub.path}`}>
+                                                                            <Icon type={menusub.icon}/><span className="nav-text">{menusub.title}</span>
+                                                                        </Link>
+                                                                    </Menu.Item>
+                                                                ))}
+                                                            </SubMenu>
+                                                         )
+                                                    }
+                                                        return (
+                                                            <Menu.Item key={menu.key}>
+                                                                <Link to={`/${menu.path}`}>
+                                                                    <Icon type={menu.icon} /><span className="nav-text">{menu.title}</span>
+                                                                </Link>
+                                                            </Menu.Item>
+                                                        )
+                                                })}
+                                            </SubMenu>
+                                        )
+                                    }
+                                    return (
+                                        <Menu.Item key={subMenu.key}>
+                                            <Link to={`/${subMenu.path}`}>
+                                                <Icon type={subMenu.icon} /><span className="nav-text">{subMenu.title}</span>
+                                            </Link>
+                                        </Menu.Item>
+                                    )
+                                })
+                            }
+                            {/*主题颜色开关*/}
+                            <Switch style={{marginTop:"50px",marginBottom:"398px",marginLeft:"5px"}}
+                                size="small"
+                                checked={this.state.theme === 'dark'}
+                                onChange={this.changeTheme}
+                                checkedChildren="Dark"
+                                unCheckedChildren="Light"
+                            />
+                        </Menu>
+
+                    </Sider>
+                    {/*右侧布局*/}
+                    <Layout>
+                        {/*头部*/}
+                        {/*<Top toggle={this.toggle} collapsed={this.state.collapsed} userName={sessionStorage.userName}/>*/}
+                        {/*内容*/}
+                        <Contents/>
+                        <div style={{margin:"auto"}}>
+                            <Fragment>Copyright <Icon type="copyright" /> 2018 百兆100出品</Fragment>
+                        </div>
+                    </Layout>
                 </Layout>
             </Layout>
         );
