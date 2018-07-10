@@ -9,40 +9,100 @@
       "id":1,
       "key":"10",
       "icon":"home",
-      "title":"首页",
+      "title":"门户首页",
       "path":"index/home"
     },{
       "id":2,
       "key":"20",
-      "icon":"setting",
-      "title":"配置",
+      "icon":"dashboard",
+      "title":"态势感知",
       "children": [
         {
           "id":21,
           "key":"2001",
           "icon":"laptop",
-          "title":"测试",
+          "title":"资产态势",
           "path":"index/test"
         },{
           "id":22,
           "key":"2002",
-          "icon":"github",
-          "title":"测试2",
-          "children": [
-            {
-              "id":221,
-              "key":"200201",
-              "icon":"dingding",
-              "title":"测试3",
-              "path":"index/test"
-            },{
-              "id":222,
-              "key":"200202",
-              "icon":"qq",
-              "title":"测试4",
-              "path":"index/test"
-            }
-          ]
+          "icon":"pie-chart",
+          "title":"风险态势",
+          "path":"index/test"
+        },{
+          "id":23,
+          "key":"2003",
+          "icon":"rocket",
+          "title":"运行态势",
+          "path":"index/test"
+        },{
+          "id":24,
+          "key":"2004",
+          "icon":"bar-chart",
+          "title":"行为态势",
+          "path":"index/test"
+        }
+      ]
+    },{
+      "id": 3,
+      "key": "30",
+      "icon": "scan",
+      "title": "风险监测",
+      "path":"index/test"
+    },{
+      "id": 4,
+      "key": "40",
+      "icon": "api",
+      "title": "运行监测",
+      "path":"index/test"
+    },{
+      "id": 5,
+      "key": "50",
+      "icon": "codepen",
+      "title": "对象管理",
+      "path":"index/test"
+    },{
+      "id": 6,
+      "key": "60",
+      "icon": "schedule",
+      "title": "策略中心",
+      "path":"index/test"
+    },{
+      "id": 7,
+      "key": "70",
+      "icon": "share-alt",
+      "title": "事件处置",
+      "path":"index/test"
+    },{
+      "id": 8,
+      "key": "80",
+      "icon": "safety",
+      "title": "应急指挥",
+      "path":"index/test"
+    },{
+      "id": 9,
+      "key": "90",
+      "icon": "setting",
+      "title": "系统管理",
+      "children": [
+        {
+          "id":91,
+          "key":"9001",
+          "icon":"user",
+          "title":"用户管理",
+          "path":"index/test"
+        },{
+          "id":92,
+          "key":"9002",
+          "icon":"team",
+          "title":"机构管理",
+          "path":"index/test"
+        },{
+          "id":93,
+          "key":"9003",
+          "icon":"trademark",
+          "title":"角色管理",
+          "path":"index/test"
         }
       ]
     }
@@ -70,29 +130,6 @@
   ],
   "profile": {
     "name": "typicode"
-  },
-  "menus": [
-    {
-      "name": "首页",
-      "url": "index",
-      "icon": "home"
-    },
-    {
-      "name": "组件模块",
-      "url": "tool",
-      "icon": "tool",
-      "children": [
-        {
-          "name": "按钮",
-          "url": "button",
-          "icon": "appstore"
-        },
-        {
-          "name": "表单",
-          "url": "button",
-          "icon": "form"
-        }
-      ]
-    }
-  ]
+  }
+
 }
