@@ -1,5 +1,5 @@
 import React from 'react'
-import { Menu, Icon, Layout } from 'antd'
+import { Menu, Icon, Layout,Avatar  } from 'antd'
 import { Link } from 'react-router-dom'
 // import screenfull from 'screenfull'
 import './top.css'
@@ -19,7 +19,7 @@ export default class Top extends React.Component {
     }
     // 退出
     clear = (item) => {
-        if (item.key === 'logOut') {
+        if (item.key === 'logout') {
             // 清空sessionStorage中的token&&userName
             sessionStorage.token = ''
             sessionStorage.userName = ''
@@ -36,9 +36,12 @@ export default class Top extends React.Component {
                     type={this.props.collapsed ? 'menu-unfold' : 'menu-fold'}
                     onClick={this.props.toggle}
                 />
-                <Menu mode="horizontal" className="logOut" onClick={this.clear}>
-                    <SubMenu title={<span><Icon type="user" />{ this.props.userName }</span>} >
-                        <Menu.Item key="logOut"><Link to="/login" >退出</Link></Menu.Item>
+                <Menu mode="horizontal" className="logout" onClick={this.clear}>
+                    <SubMenu title={<span><Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />{ this.props.userName }</span>} >
+                        <Menu.Item  key="info"><Link to="/" ><Icon type="user"></Icon>个人中心</Link></Menu.Item>
+                        <Menu.Item key="set"><Link to="/" ><Icon type="setting"></Icon>设置</Link></Menu.Item>
+                        <Menu.Divider />
+                        <Menu.Item key="logout"><Link to="/login" >退出登录</Link></Menu.Item>
                     </SubMenu>
                 </Menu>
             </Header>
