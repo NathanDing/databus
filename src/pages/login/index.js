@@ -37,6 +37,7 @@ class LoginPage extends React.Component {
     // 表单提交
     handleSubmit = (e) => {
         e.preventDefault();
+        console.log("handleSubmit:------->",e)
         this.props.form.validateFields((err, values) => {
             if (err) {
                 console.log('表单内容格式错误: ', values);
@@ -97,8 +98,11 @@ class LoginPage extends React.Component {
                         }
                     </FormItem>
                     <FormItem>
-                        <Button type="primary" htmlType="submit" className="login-form-button">
-                            登录
+                        <Button id="login1" type="primary" htmlType="submit" className="login-form-button">
+                            登录1
+                        </Button>
+                        <Button id="login2" type="primary" htmlType="submit" className="login-form-button">
+                            登录2
                         </Button>
                     </FormItem>
                 </Form>

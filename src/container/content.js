@@ -15,8 +15,8 @@ export default class Contents extends React.Component {
     }
     render() {
         return (
-            <Content className="content">
-                <Route path="/index/home" component={Home} />
+            <Content className="content" style={{ background: '#ECECEC'}}>
+                <Route path="/index/home"  component={Home}/>
                 <Route path="/index/test" component={Test} />
             </Content>
         );

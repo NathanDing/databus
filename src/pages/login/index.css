@@ -4,7 +4,8 @@
 }
 
 .login-form-button {
-    width: 100%;
+    width: 40%;
+    margin: 5%;
 }
 .main {
     text-align: center; /*让div内部文字居中*/
