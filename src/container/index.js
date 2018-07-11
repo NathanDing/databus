@@ -126,11 +126,12 @@ export default class Container extends React.Component {
                         theme={this.state.theme}
                         trigger={null} // 去除sider底部的折叠按钮
                         collapsible
-                        collapsedWidth="55px"
+                        // collapsedWidth="55px"
                         collapsed={this.state.collapsed}
                     >
-                        <div key="collapsedState" style={{height:"24px",paddingRight:"20px"}}>
+                        <div key="collapsedState" style={{height:"20px",paddingRight:"20px"}}>
                             <Icon
+                                style={{ fontSize: 16, color: '#08c' }}
                                 className={this.state.theme === 'light'?"trigger":"trigger white"}
                                 type={this.state.collapsed ? 'menu-unfold' : 'menu-fold'}
                                 onClick={this.toggle}
@@ -188,13 +189,18 @@ export default class Container extends React.Component {
                                 })
                             }
                             {/*主题颜色开关*/}
-                            <Switch style={{marginTop:"50px",marginBottom:"398px",marginLeft:"5px"}}
-                                size="small"
-                                checked={this.state.theme === 'dark'}
-                                onChange={this.changeTheme}
-                                checkedChildren="Dark"
-                                unCheckedChildren="Light"
-                            />
+
+
+                            <Menu.Item disabled="true" style={{marginBottom:"400px"}}>
+                                <Switch
+                                        size="small"
+                                        checked={this.state.theme === 'dark'}
+                                        onChange={this.changeTheme}
+                                        checkedChildren="Dark"
+                                        unCheckedChildren="Light"
+                                />
+                            </Menu.Item>
+
                         </Menu>
 
                     </Sider>
